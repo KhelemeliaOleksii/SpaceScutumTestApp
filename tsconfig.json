@@ -18,7 +18,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "./", // custom: need to write absolutely path
+    "paths": { // custom: need to write absolutely path
+      "@/*": [
+        "src/*"
+      ]
+    },
   },
   "include": [
     "src"

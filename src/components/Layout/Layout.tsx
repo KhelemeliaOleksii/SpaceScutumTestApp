@@ -9,7 +9,7 @@ export const Layout = () => {
             <Container>
                 {/* <AppBar /> */}
                 {/* <Outlet /> */}
-                <p>Hello</p>
+                <p>Hello everyone! I try</p>
                 <NotifyContainer />
             </Container>
         </>

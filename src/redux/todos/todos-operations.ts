@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'src/api/todosAPI'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { todo, todoImport } from 'src/types/todos-type';
 

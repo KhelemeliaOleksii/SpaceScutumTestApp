@@ -1,7 +1,17 @@
+import { createSelector } from "@reduxjs/toolkit";
 import { stateTodosType } from "./todos-types";
-import { todo } from "src/types/todos-type";
+import { todo, todoImport } from "src/types/todos-type";
 
 export const getAllTodos = (state: stateTodosType) => state.todos;
+
+export const getPageNumber = (state: stateTodosType) => state.page;
+
+export const getTodosNumberPerPage = (state: stateTodosType) => state.perPage;
+
+export const getCurrentTodo = (state: stateTodosType) => state.currentTodo;
+
+export const getTodosToShowClientPagination = createSelector([getAllTodos, getPageNumber, getTodosNumberPerPage], (todos, page, perPage) =>
+    configureTodosListToShow(todos, page, perPage))
 
 type TodosPerPageClientPagination = {
     isPageFirst: boolean;
@@ -9,8 +19,9 @@ type TodosPerPageClientPagination = {
     todos: todo[];
 } | null;
 
-export const getTodosPerPageClientPagination = (state: stateTodosType, page: number, perPage: number): TodosPerPageClientPagination => {
-    const todosAmount = state.todos.length;
+export const configureTodosListToShow = (todos: todoImport[], page: number, perPage: number): TodosPerPageClientPagination => {
+    const todosAmount = todos.length;
+
     const pagesAmount = Math.ceil(todosAmount / perPage);
     //invalid value for number of a page
     if (page <= 0 || page > pagesAmount) {
@@ -28,6 +39,6 @@ export const getTodosPerPageClientPagination = (state: stateTodosType, page: num
     return {
         isPageFirst,
         isPageLast,
-        todos: state.todos.slice((page - 1) * perPage, (page * perPage) + 1),
+        todos: todos.slice((page - 1) * perPage, (page * perPage) + 1),
     }
 }

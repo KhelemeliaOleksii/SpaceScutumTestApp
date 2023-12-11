@@ -32,6 +32,8 @@ export const todosSlide = createSlice({
         builder
             // getAllTodos
             .addCase(getAllTodos.pending, (state: stateTodosOperationsType) => {
+                console.log("request get all todos");
+
                 state.isPending = true;
                 state.error = null;
             })
